@@ -1,0 +1,108 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.user {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #fff;
+}
+
+.user .avatar {
+  display: flex;
+  flex-direction: row;
+  padding-left: 1.0rem;
+}
+
+.user .avatar img {
+  width: 4.0rem;
+  height: 4.0rem;
+}
+
+.user .avatar .nickname {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 1.0rem;
+}
+
+.user .avatar .nickname .desc {
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+
+.user .score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-right: 0.9rem;
+}
+
+.promotion {
+  margin-top: 1.0rem;
+  background-color: #fff;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.promotion .itemHeader {
+  flex: 1;
+  padding-left: 1.0rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.promotion .itemBody {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.promotion .itemBody .item {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-color: #EDECF2;
+  border-style: solid;
+  border-width: 1px;
+  padding-top: 1.0rem;
+  padding-bottom: 0.5rem;
+}
+
+.promotion .itemBody .item img {
+  width: 6.0rem;
+  height: 6.0rem;
+}
+
+.promotion .itemBody .item .title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.promotion .itemBody .item .score {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.0rem;
+  font-weight: bold;
+  color: red;
+}

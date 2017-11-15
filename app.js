@@ -4,11 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var AV = require('leancloud-storage')
+var GLOBAL_CONFIG = require('./config')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var score = require('./routes/score');
+var exchange = require('./routes/exchange')
 
 var app = express();
+
+AV.init(GLOBAL_CONFIG.LC_APP_ID, GLOBAL_CONFIG.LC_APP_KEY)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/score', score);
+app.use('/exchange', exchange)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

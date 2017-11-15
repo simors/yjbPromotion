@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>积分商场</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" >
+    <link rel='stylesheet' href='/stylesheets/score.css' >
+  </head>
+  <body>
+  <div class="user">
+    <div class="avatar">
+      <img src=<%= avatar %> alt="">
+      <div class="nickname">
+        <%= nickname %>
+        <div class="desc">普通会员</div>
+      </div>
+    </div>
+    <div class="score">
+      <%= score %> 积分
+    </div>
+  </div>
+  <div class="promotion">
+    <div class="itemHeader">礼品专区</div>
+    <div class="itemBody">
+      <% gifts.forEach((value) => { %>
+      <div id=<%= value.id%> class="item" onclick="onGiftClick(this)">
+        <img src=<%= value.imageList[0] %> alt="">
+        <div class="title"><%= value.title%></div>
+        <div class="score">
+          <%= value.scores%>
+          <div>积分</div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  </body>
+
+  <script type="text/javascript">
+    var userId = "<%=userId%>"
+    var promotionId = "<%=promotionId%>"
+
+    function onGiftClick(_this) {
+      var giftId = _this.id
+      console.log("giftId", giftId)
+      window.location.href = "/exchange/" + userId + "/" + promotionId + "/" + giftId
+    }
+  </script>
+</html>
