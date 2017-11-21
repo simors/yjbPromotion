@@ -85,7 +85,9 @@
       }).then(() => {
         loadingToast.style.display = 'none'
         successToast.style.display = 'block'
-        window.history.back(-1)
+        setTimeout(function () {
+          window.history.back(-1)
+        }, 1000)
       }).catch((error) => {
         loadingToast.style.display = 'none'
         switch (error.code) {
