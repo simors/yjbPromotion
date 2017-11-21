@@ -3,11 +3,107 @@
   <head>
     <meta charset="utf-8"/>
     <title>礼品兑换</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" >
-    <link rel="stylesheet" href="/stylesheets/exchange.css" >
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css"/>
+    <link rel='stylesheet' href='/stylesheets/exchange.css' />
   </head>
   <body>
+  <div>
+    <div class="inputArea">
+      <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+          <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+          <div class="weui-cell__bd">
+            <input id="name" class="weui-input" type="text" placeholder="请输入寄件接收人"/>
+          </div>
+        </div>
+        <div class="weui-cell weui-cell_select weui-cell_select-before">
+          <div class="weui-cell__hd">
+            <select class="weui-select" name="select2">
+              <option value="1">+86</option>
+            </select>
+          </div>
+          <div class="weui-cell__bd">
+            <input id="phone" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入联系方式"/>
+          </div>
+        </div>
+        <div class="weui-cell">
+          <div class="weui-cell__hd"><label class="weui-label">地址</label></div>
+          <div class="weui-cell__bd">
+            <textarea id="addr" class="weui-textarea" placeholder="请输入寄件详细地址" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button">
+      <a href="javascript:onExchange();" class="weui-btn weui-btn_primary">兑换</a>
+    </div>
+  </div>
+  <div id="loadingToast" style="display:none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+      <i class="weui-loading weui-icon_toast"></i>
+      <p class="weui-toast__content">请稍后</p>
+    </div>
+  </div>
+  <div id="successToast" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+      <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+      <p class="weui-toast__content">兑换成功</p>
+    </div>
+  </div>
   </body>
   <script type="application/javascript">
+    AV.init({appId: "<%=appId%>", appKey: "<%=appKey%>"});
+    var userId = "<%=userId%>"
+    var promotionId = "<%=promotionId%>"
+    var giftId = "<%=giftId%>"
+
+    function onExchange() {
+      console.log("userId:", userId)
+      console.log("promotionId:", promotionId)
+      console.log("giftId:", giftId)
+      var name = document.getElementById('name')
+      var phone = document.getElementById('phone')
+      var addr = document.getElementById('addr')
+      var loadingToast = document.getElementById('loadingToast')
+      var successToast = document.getElementById('successToast')
+      if(!userId || !promotionId || !giftId || !name.value || !phone.value || !addr.value) {
+        alert("输入错误")
+        return
+      }
+      loadingToast.style.display = 'block'
+      AV.Cloud.run('promExchangeGift', {
+        userId: userId,
+        promotionId: promotionId,
+        giftId: giftId,
+        name: name.value,
+        phone: phone.value,
+        addr: addr.value,
+      }).then(() => {
+        loadingToast.style.display = 'none'
+        successToast.style.display = 'block'
+        window.history.back(-1)
+      }).catch((error) => {
+        loadingToast.style.display = 'none'
+        switch (error.code) {
+          case -22:
+            alert("参数错误")
+            break
+          case -61:
+            alert("活动失效")
+            break
+          case -6007:
+            alert("积分不足")
+            break
+          default:
+            alert("兑换失败：" + error.code)
+            break
+        }
+      })
+    }
+
   </script>
 </html>
