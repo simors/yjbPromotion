@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var AV = require('leancloud-storage')
 
-
 router.get('/:id', function(req, res, next) {
   let userInfo = undefined
   var userId = req.params.id
