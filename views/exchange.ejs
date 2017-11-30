@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <title>礼品兑换</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css"/>
     <link rel='stylesheet' href='/stylesheets/exchange.css' />
+    <script type="application/javascript" src="https://unpkg.com/promotionsdk@4.0.0/dist/yiijiabao-min.js"></script>
   </head>
   <body>
   <div>
@@ -56,7 +56,10 @@
   </div>
   </body>
   <script type="application/javascript">
-    AV.init({appId: "<%=appId%>", appKey: "<%=appKey%>"});
+    var yiijiabao = require('yiijiabao')
+    var appId = "<%= appId %>"
+    var appKey = "<%= appKey %>"
+    yiijiabao.init(appId, appKey)
     var userId = "<%=userId%>"
     var promotionId = "<%=promotionId%>"
     var giftId = "<%=giftId%>"
@@ -75,35 +78,37 @@
         return
       }
       loadingToast.style.display = 'block'
-      AV.Cloud.run('promExchangeGift', {
+      yiijiabao.exchange({
         userId: userId,
         promotionId: promotionId,
         giftId: giftId,
         name: name.value,
         phone: phone.value,
         addr: addr.value,
-      }).then(() => {
+      }, function (error, result) {
+        if(error) {
+          loadingToast.style.display = 'none'
+          switch (error.code) {
+            case -22:
+              alert("参数错误")
+              break
+            case -61:
+              alert("活动失效")
+              break
+            case -6007:
+              alert("积分不足")
+              break
+            default:
+              alert("兑换失败：" + error.code)
+              break
+          }
+          return
+        }
         loadingToast.style.display = 'none'
         successToast.style.display = 'block'
         setTimeout(function () {
           window.history.back(-1)
         }, 1000)
-      }).catch((error) => {
-        loadingToast.style.display = 'none'
-        switch (error.code) {
-          case -22:
-            alert("参数错误")
-            break
-          case -61:
-            alert("活动失效")
-            break
-          case -6007:
-            alert("积分不足")
-            break
-          default:
-            alert("兑换失败：" + error.code)
-            break
-        }
       })
     }
 

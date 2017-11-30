@@ -12,9 +12,9 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
-    "leancloud-storage": "^3.4.0",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
+    "promotionsdk": "^4.0.0",
     "serve-favicon": "~2.4.5",
     "wechat-oauth": "^1.2.1"
   }

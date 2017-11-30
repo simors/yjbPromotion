@@ -4,8 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var AV = require('leancloud-storage')
 var GLOBAL_CONFIG = require('./config')
+var yiijiabao = require('promotionsdk')
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -14,7 +15,7 @@ var exchange = require('./routes/exchange')
 
 var app = express();
 
-AV.init(GLOBAL_CONFIG.LC_APP_ID, GLOBAL_CONFIG.LC_APP_KEY)
+yiijiabao.init(GLOBAL_CONFIG.LC_APP_ID, GLOBAL_CONFIG.LC_APP_KEY)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

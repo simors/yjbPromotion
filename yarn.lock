@@ -177,7 +177,7 @@ crypt@~0.0.1:
   version "0.0.2"
   resolved "http://registry.npm.taobao.org/crypt/download/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
 
-debug@2.6.9, debug@^2.2.0, debug@^2.4.4, debug@^2.6.9, debug@~2.6.9:
+debug@2.6.9, debug@^2.4.4, debug@^2.6.9, debug@~2.6.9:
   version "2.6.9"
   resolved "http://registry.npm.taobao.org/debug/download/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -419,11 +419,11 @@ leancloud-realtime@^3.5.0:
     uuid "^3.0.0"
     ws "^3.0.0"
 
-leancloud-storage@^3.4.0:
-  version "3.4.0"
-  resolved "http://registry.npm.taobao.org/leancloud-storage/download/leancloud-storage-3.4.0.tgz#98fe22f3f30787c1d72f06246c61e556e4819dc6"
+leancloud-storage@^3.4.1:
+  version "3.4.2"
+  resolved "https://registry.npmjs.org/leancloud-storage/-/leancloud-storage-3.4.2.tgz#1b1a63b9a65f70bf4332371ed2246c65606d327d"
   dependencies:
-    debug "^2.2.0"
+    debug "^3.1.0"
     es6-promise "^4.0.5"
     eventemitter3 "^2.0.3"
     leancloud-realtime "^3.5.0"
@@ -573,6 +573,12 @@ path-to-regexp@0.1.7:
 process-nextick-args@~1.0.6:
   version "1.0.7"
   resolved "http://registry.npm.taobao.org/process-nextick-args/download/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
+
+promotionsdk@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/promotionsdk/-/promotionsdk-4.0.0.tgz#1b9d33531a4f5ba885a704c9234052a5ab161c81"
+  dependencies:
+    leancloud-storage "^3.4.1"
 
 protobufjs@^5.0.1:
   version "5.0.2"
